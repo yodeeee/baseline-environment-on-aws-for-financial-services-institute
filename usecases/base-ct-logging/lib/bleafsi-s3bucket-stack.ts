@@ -16,6 +16,7 @@ export class S3BucketStack extends cdk.Stack {
     const archiveLogsBucket = new s3.Bucket(this, 'ArchiveLogsBucket', {
       accessControl: s3.BucketAccessControl.LOG_DELIVERY_WRITE,
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
+      objectOwnership: s3.ObjectOwnership.OBJECT_WRITER,
       versioned: true,
       encryption: s3.BucketEncryption.S3_MANAGED,
       removalPolicy: cdk.RemovalPolicy.RETAIN,
@@ -47,6 +48,7 @@ export class S3BucketStack extends cdk.Stack {
     const logsBucket = new s3.Bucket(this, 'logsBucket', {
       accessControl: s3.BucketAccessControl.PRIVATE,
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
+      objectOwnership: s3.ObjectOwnership.OBJECT_WRITER,
       versioned: true,
       removalPolicy: cdk.RemovalPolicy.RETAIN,
       serverAccessLogsBucket: archiveLogsBucket,
